@@ -6,11 +6,11 @@ the PI4 GPIO connector. The PI4 SPI driver provides the active link with two add
 for Reset and TX/RX control. This particular application is as a hub for my LoRaLan implementation.
 
 ## Design
-The code is mostly derived from Heltec Aduino inteface for the SX1276. There are minor config register 
+The code is mostly derived from Heltec Aduino interface for the SX1276. There are minor config register 
 differences between SX1272 and SX1276 hence the #define SX1272. Of note is that the SX1272 minimum
 signal bandwith is 125Khz. The SX1276 chips must be set to the same bandwidth.
 
-My inteface difers from the Heltec implementation in using a non-blocking continuous receive
+My interface difers from the Heltec implementation in using a non-blocking continuous receive
 implementation.
 
 ## Build
