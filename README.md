@@ -1,6 +1,7 @@
 # PI4_RF-LoRa-868
 
 ## Interface of PI4 with RF-LORA-868
+
 The RF-LORA-868 is an easily available SX1272 LoRa implementation and readily connected via
 the PI4 GPIO connector. The PI4 SPI driver provides the active link with two additional pins
 for Reset and TX/RX control. This particular application is as a hub for my LoRaLan implementation.
