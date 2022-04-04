@@ -59,11 +59,7 @@
 #define REG_SYNC_WORD            0x39
 #define REG_DIO_MAPPING_1        0x40
 #define REG_VERSION              0x42
-#ifdef SX1272
- #define REG_PaDac				      0x5a
-#else
- #define REG_PaDac				      0x4d
-#endif
+#define REG_PaDac				      0x4d
 
 // GPIO pins
 #define RST		24
@@ -93,7 +89,6 @@
   long packetFrequencyError();
   int  packetRssi();
   int  packetSnr();
-  uint8_t sxrandom();
   void explicitHeaderMode();
   int  RxSeqDetect(int mask);
   int  RxPak_nb();
