@@ -44,12 +44,12 @@
 #endif
 
 // modes
-#define MODE_LONG_RANGE_MODE     0x80
 #ifdef SX1272
- #define MODE_HF						0x00
+ #define MODE_LONG_RANGE_MODE     0x80
 #else
- #define MODE_HF						0x08
+ #define MODE_LONG_RANGE_MODE     0x80
 #endif
+#define MODE_HF						0x08
 #define MODE_SLEEP               0x00
 #define MODE_STDBY               0x01
 #define MODE_TX                  0x03
