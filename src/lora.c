@@ -246,11 +246,19 @@ int packetRssi()
 	}
     if(snr<0)
     {
+#ifdef SX1272
+      rssi = rssi - 139 + ( rssi >> 4 ) + snr;
+#else
     	rssi = rssi - (_frequency < 525E6 ? 164 : 157) + ( rssi >> 4 ) + snr;
+#endif
     }
     else
     {
+#ifdef SX1272
+    	rssi = rssi - 139 + ( rssi >> 4 );
+#else
     	rssi = rssi - (_frequency < 525E6 ? 164 : 157) + ( rssi >> 4 );
+#endif
     }
 
   return ( rssi );

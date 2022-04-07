@@ -37,15 +37,19 @@
 #define REG_SYNC_WORD            0x39
 #define REG_DIO_MAPPING_1        0x40
 #define REG_VERSION              0x42
-#define REG_PaDac				      0x4d
+#ifdef SX1272
+ #define REG_PaDac				      0x5a
+#else
+ #define REG_PaDac				      0x4d
+#endif
 
 // modes
+#define MODE_LONG_RANGE_MODE     0x80
 #ifdef SX1272
- #define MODE_LONG_RANGE_MODE     0x80
+ #define MODE_HF						0x00
 #else
- #define MODE_LONG_RANGE_MODE     0x80
+ #define MODE_HF						0x08
 #endif
-#define MODE_HF						0x08
 #define MODE_SLEEP               0x00
 #define MODE_STDBY               0x01
 #define MODE_TX                  0x03
@@ -195,6 +199,11 @@ void disableCrc()
 // SX1276
   writeRegister(REG_MODEM_CONFIG_2, readRegister(REG_MODEM_CONFIG_2) & 0xfb);
 #endif
+}
+
+uint8_t sxrandom()
+{
+  return readRegister(REG_RSSI_WIDEBAND);
 }
 
 void setTxPowerMax(int level)
@@ -412,7 +421,7 @@ int endPacket()
   writeRegister(REG_OP_MODE, MODE_HF | MODE_LONG_RANGE_MODE | MODE_TX);
   // wait for TX done
   while((readRegister(REG_IRQ_FLAGS) & IRQ_TX_DONE_MASK) == 0)
-     delay(5);
+     usleep(5000) ;
   // clear IRQ's
   writeRegister(REG_IRQ_FLAGS, IRQ_TX_DONE_MASK);
 // Set RF switch to RX
@@ -515,12 +524,12 @@ void cancelRx_nb()
 void resetSX()
 {
   digitalWrite(RST, HIGH);
-  delay(5) ;
+  usleep(5000) ;
   digitalWrite(RST, LOW);
 #ifdef SX1272
   digitalWrite(RX_TX, HIGH);   //receive
 #endif
-  delay(5) ; ;
+  usleep(5000) ; ;
 }
 
 // For the SX1752 set PABOOST is complusory as RFI not connected
@@ -555,6 +564,6 @@ void init_lora(long frequency,bool PABOOST)
   setSyncWord(0x34);
   disableCrc();
   idlemode();
-  delay(10) ;
+  usleep(10000) ;
 }
 
